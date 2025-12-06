@@ -1,35 +1,43 @@
 // @ts-check
-// `@type` JSDoc annotations allow editor autocompletion and type checking
-// (when paired with `@ts-check`).
-// There are various equivalent ways to declare your Docusaurus config.
-// See: https://docusaurus.io/docs/api/docusaurus-config
+// Note: type annotations allow type checking and IDEs to inspect type of config
 
 import {themes as prismThemes} from 'prism-react-renderer';
 
-// This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
-
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'My Site',
-  tagline: 'Dinosaurs are cool',
+  // --- Site Metadata ---
+  title: "Docs as Code", 
+  tagline: 'Documentation deployed to GitHub Pages',
   favicon: 'img/favicon.ico',
 
-  // Future flags, see https://docusaurus.io/docs/api/docusaurus-config#future
-  future: {
-    v4: true, // Improve compatibility with the upcoming Docusaurus v4
+  // --- GitHub Pages Deployment Configuration (CRITICAL FIXES HERE) ---
+  
+  // 1. Your Organization/User Domain
+  url: 'https://documentation-portfolio.github.io', 
+  
+  // 2. Your Repository Name (MUST match the name exactly, including capitalization)
+  // This fixes the 'baseUrl' error shown in the image and the broken links.
+  baseUrl: '/Docs-as-code/', 
+
+  // GitHub Pages deployment config.
+  organizationName: 'documentation-portfolio', // Your GitHub organization/user name.
+  projectName: 'Docs-as-code', // Your repo name.
+  trailingSlash: false, // Recommended for GitHub Pages deployments
+
+  // --- Build Settings ---
+  // Ensure this is set to 'throw' or 'warn' to handle broken links
+  onBrokenLinks: 'throw', 
+  onBrokenMarkdownLinks: 'warn',
+
+  // Fix for the Docusaurus v4 deprecation warning
+  markdown: {
+    hooks: {
+      onBrokenMarkdownLinks: (params) => {
+        console.warn(`[onBrokenMarkdownLinks] Source: ${params.filePath}, Link: ${params.link}`);
+      },
+    },
   },
 
-url: 'https://documentation-portfolio.github.io',
-baseUrl: '/Docs-as-code/',
-organizationName: 'Documentation-portfolio',
-projectName: 'Docs-as-code',
-
-
-  onBrokenLinks: 'throw',
-
-  // Even if you don't use internationalization, you can use this field to set
-  // useful metadata like html lang. For example, if your site is Chinese, you
-  // may want to replace "en" with "zh-Hans".
   i18n: {
     defaultLocale: 'en',
     locales: ['en'],
@@ -42,25 +50,13 @@ projectName: 'Docs-as-code',
       ({
         docs: {
           sidebarPath: './sidebars.js',
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
           editUrl:
-            'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
+            'https://github.com/documentation-portfolio/Docs-as-code/tree/main/',
         },
         blog: {
           showReadingTime: true,
-          feedOptions: {
-            type: ['rss', 'atom'],
-            xslt: true,
-          },
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
           editUrl:
-            'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
-          // Useful options to enforce blogging best practices
-          onInlineTags: 'warn',
-          onInlineAuthors: 'warn',
-          onUntruncatedBlogPosts: 'warn',
+            'https://github.com/documentation-portfolio/Docs-as-code/tree/main/',
         },
         theme: {
           customCss: './src/css/custom.css',
@@ -72,27 +68,24 @@ projectName: 'Docs-as-code',
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
-      // Replace with your project's social card
       image: 'img/docusaurus-social-card.jpg',
-      colorMode: {
-        respectPrefersColorScheme: true,
-      },
       navbar: {
-        title: 'My Site',
+        title: 'Docs as Code', 
         logo: {
-          alt: 'My Site Logo',
+          alt: 'My Docs Logo',
           src: 'img/logo.svg',
         },
         items: [
+          // This uses 'docSidebar' to correctly link to the docs index
           {
-            type: 'docSidebar',
-            sidebarId: 'tutorialSidebar',
+            type: 'docSidebar', 
+            sidebarId: 'tutorialSidebar', 
             position: 'left',
-            label: 'Tutorial',
+            label: 'Documentation',
           },
           {to: '/blog', label: 'Blog', position: 'left'},
           {
-            href: 'https://github.com/facebook/docusaurus',
+            href: 'https://github.com/documentation-portfolio/Docs-as-code',
             label: 'GitHub',
             position: 'right',
           },
@@ -105,43 +98,13 @@ projectName: 'Docs-as-code',
             title: 'Docs',
             items: [
               {
-                label: 'Tutorial',
+                label: 'Tutorial Intro',
                 to: '/docs/intro',
               },
             ],
           },
-          {
-            title: 'Community',
-            items: [
-              {
-                label: 'Stack Overflow',
-                href: 'https://stackoverflow.com/questions/tagged/docusaurus',
-              },
-              {
-                label: 'Discord',
-                href: 'https://discordapp.com/invite/docusaurus',
-              },
-              {
-                label: 'X',
-                href: 'https://x.com/docusaurus',
-              },
-            ],
-          },
-          {
-            title: 'More',
-            items: [
-              {
-                label: 'Blog',
-                to: '/blog',
-              },
-              {
-                label: 'GitHub',
-                href: 'https://github.com/facebook/docusaurus',
-              },
-            ],
-          },
         ],
-        copyright: `Copyright © ${new Date().getFullYear()} My Project, Inc. Built with Docusaurus.`,
+        copyright: `Copyright © ${new Date().getFullYear()} Docs as Code Site. Built with Docusaurus.`,
       },
       prism: {
         theme: prismThemes.github,

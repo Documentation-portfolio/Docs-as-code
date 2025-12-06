@@ -13,15 +13,13 @@ const config = {
   // --- GitHub Pages Deployment Configuration (FIXED FOR BROKEN LINKS) ---
   
   // 1. GitHub Username for the domain
-  url: 'https://Documentation-portfolio.github.io', 
-  
-  // 2. Repository Name (MUST match the name exactly, including capitalization)
-  // This serves as the path prefix and resolves the broken link issue.
-  baseUrl: '/docs-as-code/', 
+  // GitHub Pages settings
+  url: 'https://Documentation-portfolio.github.io',
+  baseUrl: '/Docs-as-code/',
 
-  // GitHub Pages deployment config.
-  organizationName: 'Documentation-portfolio', // Your GitHub user name.
-  projectName: 'docs-as-code', // Your repo name.
+  organizationName: 'Documentation-portfolio',
+  projectName: 'Docs-as-code',
+
   trailingSlash: false, // Recommended for GitHub Pages deployments
 
   // --- Build Settings ---

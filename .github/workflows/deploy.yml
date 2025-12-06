@@ -4,7 +4,7 @@ on:
     branches:
       - main
 
-# ensure the workflow has write permissions needed to push to gh-pages
+# You can keep this global permissions block, but the job-level one is more critical.
 permissions:
   contents: write
   pages: write
@@ -13,6 +13,12 @@ permissions:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+    
+    # 🛠️ CRITICAL FIX: Explicitly grant write access to the job's token 
+    # to allow peaceiris/actions-gh-pages to push to the gh-pages branch.
+    permissions:
+      contents: write 
+    
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -34,5 +40,6 @@ jobs:
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
+          # Ensure you are using the default GITHUB_TOKEN here
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./build

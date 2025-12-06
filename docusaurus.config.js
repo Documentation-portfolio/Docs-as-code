@@ -83,7 +83,7 @@ const config = {
             // 3. Main Sidebar ID
             sidebarId: 'tutorialSidebar', 
             position: 'left',
-            label: 'Documentation',
+            label: 'Docs',
           },
           {to: '/blog', label: 'Blog', position: 'left'},
           {

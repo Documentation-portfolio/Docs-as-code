@@ -4,7 +4,6 @@ on:
     branches:
       - main
 
-# You can keep this global permissions block, but the job-level one is more critical.
 permissions:
   contents: write
   pages: write
@@ -13,33 +12,21 @@ permissions:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-    
-    # 🛠️ CRITICAL FIX: Explicitly grant write access to the job's token 
-    # to allow peaceiris/actions-gh-pages to push to the gh-pages branch.
-    permissions:
-      contents: write 
-    
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
           persist-credentials: true
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: '20'
 
-      - name: Install dependencies
-        run: npm ci
+      - run: npm ci
 
-      - name: Build Docusaurus site
-        run: npm run build
+      - run: npm run build
 
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v4
+      - uses: peaceiris/actions-gh-pages@v4
         with:
-          # Ensure you are using the default GITHUB_TOKEN here
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./build

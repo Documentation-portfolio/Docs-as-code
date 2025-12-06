@@ -1,40 +1,40 @@
 // @ts-check
-// Note: type annotations allow type checking and IDEs to inspect type of config
+// `@type` JSDoc annotations allow editor autocompletion and type checking
+// (when paired with `@ts-check`).
+// There are various equivalent ways to declare your Docusaurus config.
+// See: https://docusaurus.io/docs/api/docusaurus-config
 
 import {themes as prismThemes} from 'prism-react-renderer';
 
+// This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
+
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  // --- Site Metadata ---
-  title: "Riya's Docs as Code", // Main site title in browser tab/metadata
-  tagline: 'Documentation deployed to GitHub Pages',
+  title: 'My Site',
+  tagline: 'Dinosaurs are cool',
   favicon: 'img/favicon.ico',
 
-  // --- GitHub Pages Deployment Configuration (FIXED FOR BROKEN LINKS) ---
-  
-  // 1. GitHub Username for the domain
-  // GitHub Pages settings
-  url: 'https://Documentation-portfolio.github.io',
-  baseUrl: '/Docs-as-code/',
-
-  organizationName: 'Documentation-portfolio',
-  projectName: 'Docs-as-code',
-
-  trailingSlash: false, // Recommended for GitHub Pages deployments
-
-  // --- Build Settings ---
-  onBrokenLinks: 'throw', 
-  onBrokenMarkdownLinks: 'warn',
-
-  // Fix for the Docusaurus v4 deprecation warning
-  markdown: {
-    hooks: {
-      onBrokenMarkdownLinks: (params) => {
-        console.warn(`[onBrokenMarkdownLinks] Source: ${params.filePath}, Link: ${params.link}`);
-      },
-    },
+  // Future flags, see https://docusaurus.io/docs/api/docusaurus-config#future
+  future: {
+    v4: true, // Improve compatibility with the upcoming Docusaurus v4
   },
 
+  // Set the production url of your site here
+  url: 'https://your-docusaurus-site.example.com',
+  // Set the /<baseUrl>/ pathname under which your site is served
+  // For GitHub pages deployment, it is often '/<projectName>/'
+  baseUrl: '/',
+
+  // GitHub pages deployment config.
+  // If you aren't using GitHub pages, you don't need these.
+  organizationName: 'facebook', // Usually your GitHub org/user name.
+  projectName: 'docusaurus', // Usually your repo name.
+
+  onBrokenLinks: 'throw',
+
+  // Even if you don't use internationalization, you can use this field to set
+  // useful metadata like html lang. For example, if your site is Chinese, you
+  // may want to replace "en" with "zh-Hans".
   i18n: {
     defaultLocale: 'en',
     locales: ['en'],
@@ -47,14 +47,25 @@ const config = {
       ({
         docs: {
           sidebarPath: './sidebars.js',
-          // Edit URL should also use your user/repo name
+          // Please change this to your repo.
+          // Remove this to remove the "edit this page" links.
           editUrl:
-            'https://github.com/RiyaChawla-111/Docs-as-code/tree/main/',
+            'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
         },
         blog: {
           showReadingTime: true,
+          feedOptions: {
+            type: ['rss', 'atom'],
+            xslt: true,
+          },
+          // Please change this to your repo.
+          // Remove this to remove the "edit this page" links.
           editUrl:
-            'https://github.com/RiyaChawla-111/Docs-as-code/tree/main/',
+            'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
+          // Useful options to enforce blogging best practices
+          onInlineTags: 'warn',
+          onInlineAuthors: 'warn',
+          onUntruncatedBlogPosts: 'warn',
         },
         theme: {
           customCss: './src/css/custom.css',
@@ -66,26 +77,27 @@ const config = {
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
+      // Replace with your project's social card
       image: 'img/docusaurus-social-card.jpg',
+      colorMode: {
+        respectPrefersColorScheme: true,
+      },
       navbar: {
-        // Your confirmed navbar title
-        title: 'Docs as Code', 
+        title: 'My Site',
         logo: {
-          alt: 'My Docs Logo',
+          alt: 'My Site Logo',
           src: 'img/logo.svg',
         },
         items: [
-          // FIX: Using 'docSidebar' with the correct ID for the Docs link.
           {
-            type: 'docSidebar', 
-            // 3. Main Sidebar ID
-            sidebarId: 'tutorialSidebar', 
+            type: 'docSidebar',
+            sidebarId: 'tutorialSidebar',
             position: 'left',
-            label: 'Docs',
+            label: 'Tutorial',
           },
           {to: '/blog', label: 'Blog', position: 'left'},
           {
-            href: 'https://github.com/RiyaChawla-111/Docs-as-code',
+            href: 'https://github.com/facebook/docusaurus',
             label: 'GitHub',
             position: 'right',
           },
@@ -98,14 +110,43 @@ const config = {
             title: 'Docs',
             items: [
               {
-                label: 'Tutorial Intro',
-                to: '/docs/intro', // Link to your first document's slug
+                label: 'Tutorial',
+                to: '/docs/intro',
               },
             ],
           },
-          // You can customize the rest of the links here
+          {
+            title: 'Community',
+            items: [
+              {
+                label: 'Stack Overflow',
+                href: 'https://stackoverflow.com/questions/tagged/docusaurus',
+              },
+              {
+                label: 'Discord',
+                href: 'https://discordapp.com/invite/docusaurus',
+              },
+              {
+                label: 'X',
+                href: 'https://x.com/docusaurus',
+              },
+            ],
+          },
+          {
+            title: 'More',
+            items: [
+              {
+                label: 'Blog',
+                to: '/blog',
+              },
+              {
+                label: 'GitHub',
+                href: 'https://github.com/facebook/docusaurus',
+              },
+            ],
+          },
         ],
-        copyright: `Copyright © ${new Date().getFullYear()} Docs as Code Site. Built with Docusaurus.`,
+        copyright: `Copyright © ${new Date().getFullYear()} My Project, Inc. Built with Docusaurus.`,
       },
       prism: {
         theme: prismThemes.github,

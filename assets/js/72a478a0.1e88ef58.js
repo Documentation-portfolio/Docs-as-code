@@ -1,0 +1,1 @@
+"use strict";(globalThis.webpackChunkdocs_as_code_temp=globalThis.webpackChunkdocs_as_code_temp||[]).push([[4509],{1745:o=>{o.exports=JSON.parse('{"metadata":{"permalink":"/Docs-as-code/blog","page":1,"postsPerPage":10,"totalPages":1,"totalCount":4,"blogDescription":"Blog","blogTitle":"Blog"}}')}}]);

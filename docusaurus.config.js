@@ -1,54 +1,66 @@
+// docusaurus.config.js
+// Minimal working Docusaurus config for your project
+
 // @ts-check
 
+/** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'Docs as Code',
-  tagline: 'Documentation Portfolio',
+  title: 'Docs-as-Code',
+  tagline: 'Documentation site',
+  url: 'https://example.com', // change to your site URL (used for sitemap)
+  baseUrl: '/',
   favicon: 'img/favicon.ico',
-
-  // --- REQUIRED FOR GITHUB PAGES DEPLOYMENT ---
-  organizationName: 'Documentation-portfolio',       // GitHub org/user
-  projectName: 'Docs-as-code',                       // Repo name
-
-  url: 'https://documentation-portfolio.github.io',  // GitHub Pages URL
-  baseUrl: '/Docs-as-code/',                         // MUST match the repo folder
-
-  deploymentBranch: 'gh-pages',                      // Your Pages branch
-
-  trailingSlash: false,
-
-  onBrokenLinks: 'throw',
-  onBrokenMarkdownLinks: 'warn',
+  organizationName: 'your-github-username-or-org', // GitHub org/user
+  projectName: 'docs-as-code', // repo name
 
   presets: [
     [
       'classic',
-      {
+      /** @type {import('@docusaurus/preset-classic').Options} */
+      ({
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
+          routeBasePath: 'docs', // docs served under /docs
         },
+        blog: false,
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
         },
-      },
+      }),
     ],
   ],
 
-  themeConfig: {
-    navbar: {
-      title: 'Docs as Code',
-      items: [
-        {
-          href: 'https://github.com/Documentation-portfolio/Docs-as-code',
-          label: 'GitHub',
-          position: 'right',
+  themeConfig:
+    /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
+    ({
+      navbar: {
+        title: 'Documentation Portfolio by Riya',
+        logo: {
+          alt: 'Docs-as-Code Logo',
+          src: 'img/logo.svg',
         },
-      ],
-    },
-    footer: {
-      style: 'dark',
-      copyright: `© ${new Date().getFullYear()}`,
-    },
-  },
+        items: [
+          {
+            type: 'docSidebar',
+            sidebarId: 'docsAsCodeSidebar', // <-- must match sidebars.js
+            position: 'left',
+            label: 'Documentation',
+          },
+          // Add other navbar items here
+          {
+            href: 'https://github.com/your-github-username/docs-as-code',
+            label: 'GitHub',
+            position: 'right',
+          },
+        ],
+      },
+      // footer optional — keep minimal to avoid errors
+      footer: {
+        style: 'dark',
+        links: [],
+        copyright: `Copyright © ${new Date().getFullYear()} Docs-as-Code`,
+      },
+    }),
 };
 
-module.exports = config;
+export default config;

@@ -1,0 +1,32 @@
+# .github/workflows/quality.yml
+
+name: Content Quality Check
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  quality-gate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: 1. Run Build (Link Check)
+        # This checks Docusaurus links and assets without deploying.
+        run: npm run build
+
+      - name: 2. Run Prettier Formatting Check
+        # Uses the new script to check formatting across the entire repo
+        run: npm run format:check
+        
+      - name: 3. Run Markdown Linter
+        # Uses the new script to check Markdown style rules
+        run: npm run lint:md

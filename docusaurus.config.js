@@ -1,116 +1,114 @@
 // @ts-check
-// Note: type annotations allow type checking and IDEs to inspect type of config
+// Note: type annotations allow type checking and IDEs to inspect the config type
 
-import {themes as prismThemes} from 'prism-react-renderer';
+import { themes as prismThemes } from 'prism-react-renderer';
+
+// Detect Netlify Deploy Preview or Netlify Production
+const isNetlify = process.env.NETLIFY === 'true';
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   // --- Site Metadata ---
-  title: "Docs as Code", 
-  tagline: 'Documentation deployed to GitHub Pages',
-  favicon: 'img/favicon.ico',
+  title: "Docs as Code",
+  tagline: "Documentation deployed to GitHub Pages",
+  favicon: "img/favicon.ico",
 
-  // --- GitHub Pages Deployment Configuration (CRITICAL FIXES HERE) ---
-  
-  // 1. Your Organization/User Domain
-  url: 'https://documentation-portfolio.github.io', 
-  
-  // 2. Your Repository Name (MUST match the name exactly, including capitalization)
-  // This fixes the 'baseUrl' error shown in the image and the broken links.
-  baseUrl: '/Docs-as-code/', 
+  // --- Required URL fields ---
+  // Base site URL → Use your GitHub Pages root URL
+  url: "https://documentation-portfolio.github.io",
 
-  // GitHub Pages deployment config.
-  organizationName: 'documentation-portfolio', // Your GitHub organization/user name.
-  projectName: 'Docs-as-code', // Your repo name.
-  trailingSlash: false, // Recommended for GitHub Pages deployments
+  // Dynamic baseUrl:
+  // - On Netlify (including Deploy Previews): use root "/"
+  // - On GitHub Pages: use repo subpath "/Docs-as-code/"
+  baseUrl: isNetlify ? "/" : "/Docs-as-code/",
 
-  // --- Build Settings ---
-  // Ensure this is set to 'throw' or 'warn' to handle broken links
-  onBrokenLinks: 'throw', 
-  onBrokenMarkdownLinks: 'warn',
+  organizationName: "documentation-portfolio",
+  projectName: "Docs-as-code",
+  trailingSlash: false,
 
-  // Fix for the Docusaurus v4 deprecation warning
+  // --- Build settings ---
+  onBrokenLinks: "throw",
+  onBrokenMarkdownLinks: "warn",
+
   markdown: {
     hooks: {
       onBrokenMarkdownLinks: (params) => {
-        console.warn(`[onBrokenMarkdownLinks] Source: ${params.filePath}, Link: ${params.link}`);
+        console.warn(
+          `[onBrokenMarkdownLinks] Source: ${params.filePath}, Link: ${params.link}`
+        );
       },
     },
   },
 
   i18n: {
-    defaultLocale: 'en',
-    locales: ['en'],
+    defaultLocale: "en",
+    locales: ["en"],
   },
 
   presets: [
     [
-      'classic',
-      /** @type {import('@docusaurus/preset-classic').Options} */
-      ({
+      "classic",
+      {
         docs: {
-          sidebarPath: './sidebars.js',
+          sidebarPath: "./sidebars.js",
           editUrl:
-            'https://github.com/documentation-portfolio/Docs-as-code/tree/main/',
+            "https://github.com/documentation-portfolio/Docs-as-code/tree/main/",
         },
         blog: {
           showReadingTime: true,
           editUrl:
-            'https://github.com/documentation-portfolio/Docs-as-code/tree/main/',
+            "https://github.com/documentation-portfolio/Docs-as-code/tree/main/",
         },
         theme: {
-          customCss: './src/css/custom.css',
+          customCss: "./src/css/custom.css",
         },
-      }),
+      },
     ],
   ],
 
-  themeConfig:
-    /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
-    ({
-      image: 'img/docusaurus-social-card.jpg',
-      navbar: {
-        title: 'Docs as Code', 
-        logo: {
-          alt: 'My Docs Logo',
-          src: 'img/logo.svg',
+  themeConfig: {
+    image: "img/docusaurus-social-card.jpg",
+    navbar: {
+      title: "Docs as Code",
+      logo: {
+        alt: "My Docs Logo",
+        src: "img/logo.svg",
+      },
+      items: [
+        {
+          type: "docSidebar",
+          sidebarId: "tutorialSidebar",
+          position: "left",
+          label: "Documentation",
         },
-        items: [
-          // This uses 'docSidebar' to correctly link to the docs index
-          {
-            type: 'docSidebar', 
-            sidebarId: 'tutorialSidebar', 
-            position: 'left',
-            label: 'Documentation',
-          },
-          {to: '/blog', label: 'Blog', position: 'left'},
-          {
-            href: 'https://github.com/documentation-portfolio/Docs-as-code',
-            label: 'GitHub',
-            position: 'right',
-          },
-        ],
-      },
-      footer: {
-        style: 'dark',
-        links: [
-          {
-            title: 'Docs',
-            items: [
-              {
-                label: 'Tutorial Intro',
-                to: '/docs/intro',
-              },
-            ],
-          },
-        ],
-        copyright: `Copyright © ${new Date().getFullYear()} Docs as Code Site. Built with Docusaurus.`,
-      },
-      prism: {
-        theme: prismThemes.github,
-        darkTheme: prismThemes.dracula,
-      },
-    }),
+        { to: "/blog", label: "Blog", position: "left" },
+        {
+          href: "https://github.com/documentation-portfolio/Docs-as-code",
+          label: "GitHub",
+          position: "right",
+        },
+      ],
+    },
+    footer: {
+      style: "dark",
+      links: [
+        {
+          title: "Docs",
+          items: [
+            {
+              label: "Tutorial Intro",
+              to: "/docs/intro",
+            },
+          ],
+        },
+      ],
+      copyright: `Copyright © ${new Date().getFullYear()} Docs as Code Site. Built with Docusaurus.`,
+    },
+    prism: {
+      theme: prismThemes.github,
+      darkTheme: prismThemes.dracula,
+    },
+  },
 };
 
 export default config;

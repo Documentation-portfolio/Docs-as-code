@@ -2,7 +2,7 @@
 id: pr-preview
 title: PR Preview Workflow
 slug: /guides/pr-preview
-sidebar_label: PR Preview
+sidebar_label: Setup a PR Preview Workflow
 ---
 # Setup a PR Preview Workflow
 Create a workflow to build a temporary preview document each time a pull request is raised. The preview file is rendered as a live site before changes are merged. Reviewers can view the preview file to review changes. The preview file ensures review accuracy and reduces regression.

@@ -2,10 +2,8 @@
 id: ci-cd-configuration
 title: CI/CD Configuration for Docs-as-Code
 slug: /guides/ci-cd-configuration
-sidebar_label: CI/CD Configuration
+sidebar_label: CI/CD Configuration for Docs-as-Code
 ---
-
-# CI/CD Configuration for Docs-as-Code
 
 ## Table of contents
 

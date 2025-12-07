@@ -5,14 +5,17 @@ const sidebars = {
   docsAsCodeSidebar: [
     'intro',
 
+    // Existing Docs-as-Code category
     {
       type: 'category',
-      label: 'Documents',     // your new top-level name
+      label: 'Docs-as-Code CI/CD Workflow Configuration',
       collapsed: false,
+      link: {
+        type: 'doc',
+        id: 'guides/docs-as-code-ci-cd-workflow',
+      },
       items: [
         'guides/ci-cd-configuration',
-
-        // Workflow Setup as a category with ONLY its subpages (no duplicate "workflow" doc)
         {
           type: 'category',
           label: 'Workflow Setup',
@@ -23,8 +26,22 @@ const sidebars = {
             'guides/pr-preview',
           ],
         },
+      ],
+    },
 
-        // other top-level guides can follow here
+    // NEW: GitHub Actions CI/CD Pipeline Documentation category
+    {
+      type: 'category',
+      label: 'GitHub Actions CI/CD Pipeline Documentation',
+      collapsed: false,
+      link: {
+        // optional: you can create a landing doc for this category (recommended)
+        type: 'doc',
+        id: 'guides/github-actions-ci-cd-pipeline-docs' // create this doc (see notes below)
+      },
+      items: [
+        'guides/ci-cd-pipeline-workflow',
+        'guides/troubleshoot-workflows',
       ],
     },
   ],

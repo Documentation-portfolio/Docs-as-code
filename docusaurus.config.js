@@ -5,12 +5,12 @@
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'Docs-as-Code',
-  tagline: 'Documentation site',
-  url: 'https://example.com', // change to your site URL (used for sitemap)
-  baseUrl: '/',
+  title: 'Documentation Portfolio',
+  tagline: 'By Riya Chawla',
+  url: 'https://Documentation-portfolio.github.io', // change to your site URL (used for sitemap)
+  baseUrl: '/Docs-as-code/',
   favicon: 'img/favicon.ico',
-  organizationName: 'your-github-username-or-org', // GitHub org/user
+  organizationName: 'Documentation-portfolio', // GitHub org/user
   projectName: 'docs-as-code', // repo name
 
   presets: [
@@ -48,7 +48,7 @@ const config = {
           },
           // Add other navbar items here
           {
-            href: 'https://github.com/your-github-username/docs-as-code',
+            href: 'https://github.com/Documentation-portfolio/docs-as-code',
             label: 'GitHub',
             position: 'right',
           },

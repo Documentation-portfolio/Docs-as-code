@@ -2,7 +2,7 @@
 id: deployment
 title: Deployment Workflow
 slug: /guides/deployment
-sidebar_label: Deployment
+sidebar_label: Setup a Deployment Workflow
 ---
 
 # Setup a Deployment Workflow to Publish Documentation

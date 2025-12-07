@@ -2,7 +2,7 @@
 id: validation
 title: Validation Workflow
 slug: /guides/validation
-sidebar_label: Validation
+sidebar_label: Setup a Validation Workflow
 ---
 # Setup a Validation Workflow for Documentation
 Setup a workflow to validate documentation for quality and standards each time a push or pull request is raised. This workflow validates the documentation quality by running automated formatting, markdown linting, and link validation checks.

@@ -1,9 +1,12 @@
 name: Deploy Docusaurus to GitHub Pages
+
+# Trigger on pushes to main (you can add other branches if needed)
 on:
   push:
     branches:
       - main
 
+# Ensure the workflow has permissions to push contents and manage Pages
 permissions:
   contents: write
   pages: write
@@ -12,21 +15,50 @@ permissions:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v4
+      # 1) Checkout full history (required by actions-gh-pages if you want to keep history)
+      - name: Checkout repository
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
           persist-credentials: true
 
-      - uses: actions/setup-node@v4
+      # 2) Setup Node
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
           node-version: '20'
 
-      - run: npm ci
+      # 3) Install dependencies (CI-friendly)
+      - name: Install dependencies
+        run: npm ci
 
-      - run: npm run build
+      # Optional: cache node modules to speed up subsequent runs
+      # (uncomment if you want caching; adjust key with package-lock.json or yarn.lock)
+      # - name: Cache node modules
+      #   uses: actions/cache@v4
+      #   with:
+      #     path: ~/.npm
+      #     key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+      #     restore-keys: |
+      #       ${{ runner.os }}-node-
 
-      - uses: peaceiris/actions-gh-pages@v4
+      # 4) Build the site
+      - name: Build website
+        run: npm run build
+
+      # 5) Deploy: push build/ to gh-pages using peaceiris/actions-gh-pages
+      - name: Deploy to gh-pages
+        uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./build
+          publish_branch: gh-pages          # explicit target branch (matches your screenshot)
+          user_name: github-actions[bot]    # optional: commit author
+          user_email: 41898282+github-actions[bot]@users.noreply.github.com
+          commit_message: "chore: publish docs (GitHub Actions)"
+          allow_empty_commit: false
+          keep_history: true                # keep git history on gh-pages branch
+          # If you have a custom domain and want to publish a CNAME, set this:
+          # cname: 'docs.example.com'

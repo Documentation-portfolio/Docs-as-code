@@ -1,3 +1,14 @@
+
+// at top of docusaurus.config.js
+const isNetlify = process.env.NETLIFY === 'true' || process.env.CONTEXT === 'deploy-preview';
+
+module.exports = {
+  // ...
+  // Use GitHub Pages subpath for production (example), but root for Netlify previews
+  baseUrl: isNetlify ? '/' : '/Docs-as-code/',
+  // ...
+};
+
 // @ts-check
 // Note: type annotations allow type checking and IDEs to inspect type of config
 

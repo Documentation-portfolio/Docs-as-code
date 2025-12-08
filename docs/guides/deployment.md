@@ -11,14 +11,18 @@ Create a workflow to build and deploy the documentation site each time changes a
 Before you begin, ensure the following:
 1. Ensure **GitHub Pages** is setup for your repository.
 2. Docusaurus outputs the static files to the `build/` directory.
+
+
 In your terminal, run:
 ```
 publish_dir: ./build
 ```
-#### Setup a Deployment Workflow
+## Setup a Deployment Workflow to Publish Documentation
 
 Step 1. In the **Workflow** folder, create a file `deploy.yaml`.
-Step 2. Paste the following workflow code into the `deploy.yaml` file:
+
+
+Step 2. Paste the following workflow code in the `deploy.yaml` file:
 ```
 name: Deploy Docs
 on:
@@ -54,6 +58,8 @@ jobs:
 ```
 
 Step 3. Commit and push the file.
+
+
 In your terminal, run:
 ```
 git add .github/workflows/deploy.yml

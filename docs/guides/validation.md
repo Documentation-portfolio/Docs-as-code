@@ -6,14 +6,20 @@ sidebar_label: Setup a Validation Workflow
 ---
 # Setup a Validation Workflow for Documentation
 Setup a workflow to validate documentation for quality and standards each time a push or pull request is raised. This workflow validates the documentation quality by running automated formatting, markdown linting, and link validation checks.
-- Prettier is used to enforce consistent formatting.
-- Markdownlint is used to validate the style and structure of the Markdown files.
-- markdown-link-check is used to ensure all itnernal and external links are valid.
+- **Prettier** is used to enforce consistent formatting.
+- **Markdownlint** is used to validate the style and structure of the Markdown files.
+- **markdown-link-check** is used to ensure all internal and external links are valid.
 
 Before you begin, perform the following:
 1. Install dependencies
+
+
 In your terminal, run:
+
+```
 npm install --save-dev prettier markdownlint-cli markdown-link-check
+```
+
 - `prettier`: Format and style checker
 - `markdownlint-cli`: Linter to check markdown formatting
 - `markdown-link-check`: Checks external and internal links in markdown files
@@ -58,7 +64,11 @@ Paste the following code in the `mlc.json` file:
 ## Setup a validation Workflow 
 
 Step 1. In the **Workflow** folder, create a file `ci.yaml`.
+
+
 Step 2. Paste the following workflow code in the `ci.yaml` file:
+
+
 ```
 name: Docs CI — Lint & Link Check
 
@@ -100,10 +110,8 @@ jobs:
         run: npm run md:lint || npm run md:lint2
 
       - name: Run link checks
-        run: |
-          # generate list of markdown files tracked in git and run markdown-link-check on each
-          git ls-files 'docs/**/*.md' > /tmp/md-files.txt
-          # parallel checks could be added; run sequentially to keep logs readable
+        run: |          
+          git ls-files 'docs/**/*.md' > /tmp/md-files.txt          
           while IFS= read -r file; do
             echo "Checking links in: $file"
             npx markdown-link-check --config .mlc.json "$file" || exit 1
@@ -126,10 +134,12 @@ Step 3. In the `package.json` file, add the following scripts.
 ```
 
 Step 4. Commit and push the file. 
+
+
 In your terminal, run: 
 ```
 git add .github/workflows/ci.yml
 git commit -m "Add CI workflow"
 git push
 ```
-Each time a push or pull request is raised, validation workflow is triggered, and the document is validated for broken links and markdown quality.
+Each time a push or pull request is raised, the validation workflow is triggered, and the document is validated for broken links and markdown quality.

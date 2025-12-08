@@ -21,6 +21,7 @@ const sidebars = {
           label: 'Workflow Setup',
           collapsed: false,
           items: [
+            'guides/ci-cd-workflow-setup/intro',
             'guides/validation',
             'guides/deployment',
             'guides/pr-preview',
@@ -29,21 +30,6 @@ const sidebars = {
       ],
     },
 
-    // NEW: GitHub Actions CI/CD Pipeline Documentation category
-    {
-      type: 'category',
-      label: 'GitHub Actions CI/CD Pipeline Documentation',
-      collapsed: false,
-      link: {
-        // optional: you can create a landing doc for this category (recommended)
-        type: 'doc',
-        id: 'guides/github-actions-ci-cd-pipeline-docs' // create this doc (see notes below)
-      },
-      items: [
-        'guides/ci-cd-pipeline-workflow',
-        'guides/troubleshoot-workflows',
-      ],
-    },
   ],
 };
 

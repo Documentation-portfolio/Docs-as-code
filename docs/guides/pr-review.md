@@ -5,19 +5,21 @@ slug: /guides/pr-preview
 sidebar_label: Setup a PR Preview Workflow
 ---
 # Setup a PR Preview Workflow
-Create a workflow to build a temporary preview document each time a pull request is raised. The preview file is rendered as a live site before changes are merged. Reviewers can view the preview file to review changes. The preview file ensures review accuracy and reduces regression.
-This procedure uses Netlify as a host for temporary links.
+Create a workflow to build a temporary preview document each time a pull request is raised. The preview file is rendered as a live site before changes are merged. Reviewers can review the preview file to give feedback. The preview file ensures review accuracy and reduces regression.
+This procedure uses **Netlify** as a host for temporary links.
 
 Before you begin, perform the following:
-1. Sign up to Netlify and create a Netlify site for your project.
-2. Create a Netlify personal access token.
+1. Sign up to **Netlify** and create a **Netlify** site for your project.
+2. Create a **Netlify** personal access token.
 3. In your repository, add the following secrets:
 - `NETLIFY_AUTH_TOKEN` = `<your-netlify-token>`
 - `NETLIFY_SITE_ID` = `<your-site-id>`
 
-Setup a PR Preview Workflow
+## Setup a PR Preview Workflow
 Step 1. In the **Workflow** folder, create a `pr-review.yaml` file.
-Paste the following code in the `pr-review.yaml` file.
+
+
+Step 2. Paste the following code in the `pr-review.yaml` file.
 ```
 name: PR Preview — Netlify
 
@@ -48,8 +50,7 @@ jobs:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
           PR_NUMBER: ${{ github.event.number }}
-        run: |
-          # deploy without --prod creates a draft/preview deploy on Netlify
+        run: |          
           npx netlify-cli deploy --dir=./build --site=$NETLIFY_SITE_ID --auth=$NETLIFY_AUTH_TOKEN --message="Preview PR #${PR_NUMBER}" --json > /tmp/netlify.json
           PREVIEW_URL=$(cat /tmp/netlify.json | jq -r '.url')
           echo "preview_url=$PREVIEW_URL" >> $GITHUB_OUTPUT
@@ -63,10 +64,12 @@ jobs:
             ✅ Netlify preview ready: ${{ steps.build-and-deploy-preview.outputs.preview_url }}
 ```
 Step 2. Commit and push the file. 
+
+
 In your terminal, run: 
 ```
 git add .github/workflows/pr-preview-netlify.yml
 git commit -m "Add PR preview deploy to Netlify"
 git push
 ```
-Each time a pull request is raised, a preview file is hosted in Netlify, and isposted in the pull review comments.
+Each time a pull request is raised, a preview file is hosted in **Netlify**, and is posted in the pull review comments.

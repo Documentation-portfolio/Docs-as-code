@@ -21,7 +21,7 @@ const sidebars = {
           label: 'Workflow Setup',
           collapsed: false,
           items: [
-            'guides/ci-cd-workflow-setup/intro',
+            'guides/ci-cd-workflow-setup/workflow-intro',
             'guides/validation',
             'guides/deployment',
             'guides/pr-preview',

@@ -7,11 +7,17 @@
 const config = {
   title: 'Documentation Portfolio',
   tagline: 'By Riya Chawla',
-  url: 'https://Documentation-portfolio.github.io', // change to your site URL (used for sitemap)
+
+  // GitHub Pages URL structure
+  url: 'https://Documentation-portfolio.github.io',
   baseUrl: '/Docs-as-code/',
+  trailingSlash: true, // IMPORTANT for GitHub Pages to avoid 404s
+
   favicon: 'img/favicon.ico',
-  organizationName: 'Documentation-portfolio', // GitHub org/user
-  projectName: 'docs-as-code', // repo name
+
+  // GitHub org/repo
+  organizationName: 'Documentation-portfolio',
+  projectName: 'Docs-as-code', // MUST match exact GitHub repo name (fixes deployment)
 
   presets: [
     [
@@ -20,9 +26,16 @@ const config = {
       ({
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
-          routeBasePath: 'docs', // docs served under /docs
+
+          // Default docs route: https://Documentation-portfolio.github.io/Docs-as-code/docs/
+          routeBasePath: 'docs',
+
+          // Good practice for GitHub Pages
+          editLocalizedFiles: false,
         },
+
         blog: false,
+
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
         },
@@ -42,19 +55,19 @@ const config = {
         items: [
           {
             type: 'docSidebar',
-            sidebarId: 'docsAsCodeSidebar', // <-- must match sidebars.js
+            sidebarId: 'docsAsCodeSidebar', // must match sidebars.js
             position: 'left',
             label: 'Documentation',
           },
-          // Add other navbar items here
+
           {
-            href: 'https://github.com/Documentation-portfolio/docs-as-code',
+            href: 'https://github.com/Documentation-portfolio/Docs-as-code',
             label: 'GitHub',
             position: 'right',
           },
         ],
       },
-      // footer optional — keep minimal to avoid errors
+
       footer: {
         style: 'dark',
         links: [],
